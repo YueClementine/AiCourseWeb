@@ -10,12 +10,6 @@
       :on-success="handleVideoSuccess"
       :before-upload="beforeUploadVideo"
       :on-progress="uploadVideoProcess">
-      <video v-if="videoForm.showVideoPath !='' && !videoFlag"
-                           v-bind:src="videoForm.showVideoPath"
-                           class="avatar video-avatar"
-                           controls="controls">
-                        您的浏览器不支持视频播放
-                    </video>
       <i v-if="Plus" class="el-icon-upload"></i>
       <div v-if="Plus" class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
       <el-progress v-if="videoFlag == true" type="circle" :percentage="videoUploadPercent" style="margin-top:30px;"></el-progress>
