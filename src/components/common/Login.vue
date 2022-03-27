@@ -81,12 +81,19 @@
 			    // })
 
 				let data = new FormData;
-				data.append('username','12345');
-				data.append('password','12345');
+				data.append('username',this.dataForm.userName);
+				data.append('password',this.dataForm.password);
 				axios.post(`/api/login`,data)
 				.then(response =>{
+					console.log(response)
+					var tokenfromlogin = response.data.data.token
 					this.$router.push({
-						name:'Home'
+						name:'Home',
+						params :{
+							token: tokenfromlogin
+						}
+						
+						
 					})
 				})
 				.catch(error =>{

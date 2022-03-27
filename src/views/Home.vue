@@ -5,7 +5,7 @@
     <el-container class="container" v-loading="false" element-loading-text="拼命加载中" element-loading-background="rgba(0, 0, 0, 0.8)"
      element-loading-spinner="el-icon-loading">
         <!-- 侧边栏 -->
-        <Aside :foldAside="foldAside" />
+        <Aside :foldAside="foldAside" :token="token" />
         <!-- 
             direction="vertical"  用于垂直布局
         -->
@@ -32,7 +32,8 @@
         },
         data() {
             return {
-                foldAside: true
+                foldAside: true,
+                token: this.$route.params.token
             }
         },
         methods: {
@@ -50,6 +51,7 @@
 		    window.addEventListener("beforeunload",()=>{
 		        localStorage.setItem("store",JSON.stringify(this.$store.state))
 		    })
+            console.log(this.token+"home.vue")
 		}
     }
 </script>

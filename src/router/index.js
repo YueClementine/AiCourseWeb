@@ -54,6 +54,22 @@ const routes = [{
 				}
 			},
 			{
+				path:'/Home/CreateExam',
+				name:'CreateExam',
+				component:()=> import('@/views/menu/Exam.vue'),
+				meta:{
+					isRouter: true
+				}
+			},
+			{
+				path:'/Home/PptUpload',
+				name:'PptUpload',
+				component:()=> import('@/views/menu/PptUpload.vue'),
+				meta:{
+					isRouter: true
+				}
+			},
+			{
 				path: '/Home/Demo/Echarts',
 				name: 'Echarts',
 				component: () => import('@/views/menu/Echarts.vue'),

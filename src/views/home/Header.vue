@@ -28,7 +28,7 @@
 				<el-submenu :title="language.userSetUp" index="3">
 					<template slot="title">
 						<span class="header-span">
-							<img src="~@/assets/avatar.gif" :alt="userName"> {{ userName }}
+							<img src="~@/assets/teacher.png" :alt="userName"> {{ userName }}
 						</span>
 					</template>
 					<el-menu-item index="3-1" @click="showPasswordBox">

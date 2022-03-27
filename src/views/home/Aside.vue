@@ -22,9 +22,18 @@
                         <i class="el-icon-s-home"></i>
                         <span slot="title">{{language.homePage}}</span>
                     </el-menu-item>
-					<el-menu-item index="VideoUpload" @click="$router.push({ name: 'VideoUpload' })">
+					<el-menu-item index="VideoUpload" @click="$router.push({ name: 'VideoUpload' ,params:{tokena:token}})">
                         <i class="el-icon-s-home"></i>
                         <span slot="title">视频上传</span>
+                    </el-menu-item>
+					<el-menu-item index="PptUpload" @click="$router.push({ name: 'PptUpload' ,params:{tokena:token}})">
+                        <i class="el-icon-s-home"></i>
+                        <span slot="title">课件上传</span>
+                    </el-menu-item>
+
+					<el-menu-item index="CreateExam" @click="$router.push({ name: 'CreateExam' ,params:{tokena:token}})">
+                        <i class="el-icon-s-home"></i>
+                        <span slot="title">创建考试</span>
                     </el-menu-item>
                     <el-submenu index="demo">
                         <template slot="title">
@@ -62,7 +71,7 @@
 	import DynamicMenu from '@/views/dynamic/DynamicMenu.vue'
 	export default {
 		name: 'Aside',
-		props: ['foldAside'],
+		props: ['foldAside','token'],
 		data() {
 			return {
 				// 保存当前选中的菜单
@@ -70,7 +79,7 @@
 				// 保存当前侧边栏的宽度
 				asideWidth: '200px',
 				// 用于拼接当前图标的 class 样式
-				iconSize: 'true'
+				iconSize: 'true',
 			}
 		},
 		components: {
