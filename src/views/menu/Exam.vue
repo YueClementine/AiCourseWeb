@@ -17,14 +17,14 @@
     
     :label="'题目'+(index+1)"
     :key="domain.key"
-    :prop="'domains.' + index + '.value'"
+    :prop="'domains.' + index + '.questioncontent'"
     :rules="{
       required: true, message: '题干不能为空', trigger: 'blur'
     }"
   >
   <el-row>
   <el-col :span="8">
-    <el-input v-model="domain.value" ></el-input></el-col> 
+    <el-input v-model="domain.questioncontent" ></el-input></el-col> 
   </el-row>
    
    
@@ -78,14 +78,14 @@
     
     :label="'选项D'"
     :key="domain.key"
-    :prop="'domains.' + index + '.opa'"
+    :prop="'domains.' + index + '.opd'"
     :rules="{
       required: true, message: '选项不能为空', trigger: 'blur'
     }"
   >
   <el-row>
   <el-col :span="8">
-    <el-input v-model="domain.opa" ></el-input></el-col> 
+    <el-input v-model="domain.opd" ></el-input></el-col> 
   </el-row>
    
    
@@ -95,14 +95,14 @@
     <el-form-item
     :label="'正确答案'"
     :key="domain.key"
-    :prop="'domain.'+index+'.answer'"
+    :prop="'domains.'+index+'.radio'"
   >
       <el-row>
 <el-col :span="12">
-<el-radio v-model="domain.radio" label="1">选项A</el-radio>
-  <el-radio v-model="domain.radio" label="2">选项B</el-radio>
-  <el-radio v-model="domain.radio" label="3">选项C</el-radio>
-  <el-radio v-model="domain.radio" label="4">选项D</el-radio>
+<el-radio v-model="domain.correctop" label="1">选项A</el-radio>
+  <el-radio v-model="domain.correctop" label="2">选项B</el-radio>
+  <el-radio v-model="domain.correctop" label="3">选项C</el-radio>
+  <el-radio v-model="domain.correctop" label="4">选项D</el-radio>
        </el-col></el-row>
          <el-col :span="6"><el-button type="danger" style="margin-top:20px" @click.prevent="removeDomain(domain)">删除此题</el-button></el-col>
 
@@ -128,6 +128,7 @@
 
 
 <script>
+import axios from 'axios'
   export default {
     data() {
       return {
@@ -136,26 +137,35 @@
           },
         dynamicValidateForm: {
           domains: [{
-            value: '',
+            questioncontent: '',
             opa:'',
             opb:'',
             opc:'',
             opd:'',
-            radio:'1',
+            correctop:'1',
           }],
-        }
+        },
+         myheaders:{Authorization:this.$route.params.token},
       };
     },
     methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
+        let data = new FormData;
+        data.append('examname',this.examInfo.name);
+
+        console.log(this.dynamicValidateForm.domains);
+        data.append('questions',JSON.stringify(this.dynamicValidateForm.domains));
+        axios.post(`/api/createExam`,data,{headers:this.myheaders})
+        .then(response =>{
+					console.log(response)
+          this.$message({
+          message: '课件创建成功',
+          type: 'success'
         });
+				})
+				.catch(error =>{
+					console.log(error)
+				})
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
@@ -168,12 +178,12 @@
       },
       addDomain() {
         this.dynamicValidateForm.domains.push({
-          value: '',
+          questioncontent: '',
           opa:'',
           opb:'',
           opc:'',
           opd:'',
-          radio:'1',  
+          correctop:'1',  
           key: Date.now()
         });
       }

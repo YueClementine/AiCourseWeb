@@ -3,7 +3,7 @@
 
   <div class="pptUpload" style="margin-right:50%">
 
-    <el-form :label-position="labelPosition" label-width="80px" :model="pptform">
+    <el-form :label-position="right" label-width="80px" :model="pptform">
   <el-form-item label="课件名称">
     <el-input v-model="pptform.name"></el-input>
   </el-form-item>

@@ -31,7 +31,7 @@
                         <span slot="title">课件上传</span>
                     </el-menu-item>
 
-					<el-menu-item index="CreateExam" @click="$router.push({ name: 'CreateExam' ,params:{tokena:token}})">
+					<el-menu-item index="CreateExam" @click="$router.push({ name: 'CreateExam' ,params:{token:token}})">
                         <i class="el-icon-s-home"></i>
                         <span slot="title">创建考试</span>
                     </el-menu-item>
